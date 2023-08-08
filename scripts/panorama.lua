@@ -26,14 +26,14 @@ end
 api = (_G == nil) and "ev0lve" or (file == nil and "primordial" or "legendware")
 local _exp_0 = api
 if "ev0lve" == _exp_0 then
-  find_pattern = utils.find_pattern
-  create_interface = utils.find_interface
+  find_pattern = Utils.FindPattern
+  create_interface = Utils.CreateInterface
 elseif "primordial" == _exp_0 then
-  find_pattern = memory.find_pattern
-  create_interface = memory.create_interface
+  find_pattern = memory.FindPattern
+  create_interface = Utils.CreateInterface
 elseif "legendware" == _exp_0 then
-  find_pattern = utils.find_signature
-  create_interface = utils.create_interface
+  find_pattern = Utils.FindSignature
+  create_interface = Utils.CreateInterface
 end
 safe_mode = xpcall and true or false
 --print(("\nluv8 panorama library;\napi: %s; safe_mode: %s; rawops: %s;"):format(api, tostring(safe_mode), tostring(rawget ~= nil)))
