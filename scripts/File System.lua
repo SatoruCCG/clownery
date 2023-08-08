@@ -1,3 +1,5 @@
+local ffi = require("ffi")
+
 local function vtable_entry(instance, index, type)
     return ffi.cast(type, (ffi.cast("void***", instance)[0])[index])
 end
