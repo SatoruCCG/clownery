@@ -10,6 +10,9 @@ setmetatable(_INFO, {
     return self._VERSION
   end
 })
+
+local ffi
+
 if _G and not ffi then
   ffi = require("ffi")
 end
