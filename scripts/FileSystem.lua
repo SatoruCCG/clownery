@@ -15,14 +15,14 @@ local function vtable_thunk(index, typestring)
 end
 
 local function vtable_bind(module, interface, index, typestring)
-    local instance = utils.find_interface(module, interface) or error("invalid interface")
+    local instance = Utils.CreateInterface(module, interface) or error("invalid interface")
     local fnptr = vtable_entry(instance, index, ffi.typeof(typestring)) or error("invalid vtable")
     return function(...)
         return fnptr(tonumber(ffi.cast("void***", instance)), ...)
     end
 end
 
-local filesystem = utils.find_interface("filesystem_stdio.dll", "VBaseFileSystem011")
+local filesystem = Utils.CreateInterface("filesystem_stdio.dll", "VBaseFileSystem011")
 local filesystem_class = ffi.cast(ffi.typeof("void***"), filesystem)
 local filesystem_vftbl = filesystem_class[0]
 
@@ -35,7 +35,7 @@ local func_close_file = ffi.cast("void (__thiscall*)(void*, void*)", filesystem_
 local func_get_file_size = ffi.cast("unsigned int (__thiscall*)(void*, void*)", filesystem_vftbl[7])
 local func_file_exists = ffi.cast("bool (__thiscall*)(void*, const char*, const char*)", filesystem_vftbl[10])
 
-local full_filesystem = utils.find_interface("filesystem_stdio.dll", "VFileSystem017")
+local full_filesystem = Utils.CreateInterface("filesystem_stdio.dll", "VFileSystem017")
 local full_filesystem_class = ffi.cast(ffi.typeof("void***"), full_filesystem)
 local full_filesystem_vftbl = full_filesystem_class[0]
 
